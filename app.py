@@ -3,7 +3,7 @@ import streamlit as st
 
 st.text('Welcome to the web application for ')
 
-image = (r"C:\\Users\\pooja.gada\\Downloads\\pjt_logo.jpg")
+image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQKuJYsupswBBx3SrHMl2MNBEAgEaOt48jyYx3plyUVEehgfciw2MhoYT_Llh1AMhzHkY&usqp=CAU"
 st.image(image,caption = 'PJT Logo')
 with st.form(key='my_form'):
     username = st.text_input('Username')

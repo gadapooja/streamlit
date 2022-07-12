@@ -1,0 +1,1 @@
+"C:\Progra~1\PowerShell\\7\pwsh.exe" -command "C:\projects\snapshot_AD_DL\support_scripts\snapshot_AD_DL\add_members_to_dl.ps1"
