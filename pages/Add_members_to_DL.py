@@ -2,12 +2,16 @@ import streamlit as st
 import pandas as pd
 import os
 import datetime
+import subprocess as sp
+import bcpy
+import sys
 
 st.title('Adding users to the distribution lists')
 st.text('This step is part of the on-boarding process and lets you add users to the required distribution lists')
 st.text('To perform this task successfully you need to provide a csv file with that contains the user\'s email address and distribution list name/email address')
 st.text('The fils shoud look like this')
-st.write(pd.read_csv('C:\Users\pooja.gada\floatspec_code\streamlit\all_employyes.csv').head())
+# example_csv_file = 'C:\Users\pooja.gada\floatspec_code\streamlit\all_employyes.csv'
+# st.write(pd.read_csv(example_csv_file).head())
 
 uploaded_file = st.file_uploader('Upload a CSV',type=['csv','xlsx'])
 if uploaded_file is not None:
@@ -20,12 +24,13 @@ else:
 now = datetime.datetime.now()
 Day = now.strftime("%Y-%m-%d")
 
-def add_members_to_dl(flag,configparser,log_file_name):
+
+def add_members_to_dl():
     st.write("\nAdding new members to distribution lists from the csv file at location C:\projects\data\\add_members.csv")
     choice = st.selectbox('Pick one',['Yes','No'])
     if choice == "Yes":
         st.write('Members are getting added to distribution lists')
-        out = sp.run([r'C:\\projects\snapshot_AD_DL\support_scripts\snapshot_AD_DL\\member.bat'] , stdout=sp.PIPE, stderr = sp.PIPE, text=True)
+        out = sp.run([r'C:\\Users\\pooja.gada\\floatspec_code\\streamlit\\streamlit\\member.bat'] , stdout=sp.PIPE, stderr = sp.PIPE, text=True)
         
         if out.stderr:
             st.write(out.stderr)
@@ -44,6 +49,7 @@ def add_members_to_dl(flag,configparser,log_file_name):
             # text_msg = f'\n New Interns were added to distribution lists on {Day}.\n Please check attached log file for more details.'
             # gm.send_mail_via_smtp(configparser.sender_address,configparser.alert_email,etl_name +  ' Intern successful',text_msg,log_file_name)
         
-    elif choice == "N":
+    elif choice == "No":
         #gm.pp('\n Did not add members to distribution lists. Going back to menu \n ')
         st.write(f'\n Did not add members to distribution lists. Going back to menu \n ')
+add_members_to_dl()
